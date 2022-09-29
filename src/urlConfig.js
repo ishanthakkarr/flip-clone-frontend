@@ -1,4 +1,5 @@
-export const api = 'http://localhost:2000/api'
+const baseUrl = window.location.hostname === "localhost" ? "http://localhost:2000" : "https://flipkart-rest-server-backend.herokuapp.com";
+
 export const generatePublicUrl = (fileName) => {
-    return `http://localhost:2000/public/${fileName}`
+    return `${baseUrl}/public/${fileName}`
 }
