@@ -58,7 +58,7 @@ const ProductStore = (props) => {
                   className="productContainer"
                 >
                   <div className="productImgContainer">
-                    <img src={generatePublicUrl(product.productPictures[0].img)} alt="" />
+                    <img src={product.productPictures[0].img} alt="" />
                   </div>
                   <div className="productInfo">
                     <div style={{ margin: "10px 0" }}>{product.name}</div>

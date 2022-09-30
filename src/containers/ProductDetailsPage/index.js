@@ -58,7 +58,7 @@ const ProductDetailsPage = (props) => {
                         {
                             product.productDetails.productPictures.map((thumb, index) =>
                                 <div className="thumbnail">
-                                    <img src={generatePublicUrl(thumb.img)} alt={thumb.img} onClick={() => setSelectedImage(thumb.img)} />
+                                    <img src={thumb.img} alt={thumb.img} onClick={() => setSelectedImage(thumb.img)} />
                                 </div>
                             )
                         }
@@ -66,7 +66,7 @@ const ProductDetailsPage = (props) => {
                     </div>
                     <div className="productDescContainer">
                         <div className="productDescImgContainer">
-                            <img src={generatePublicUrl(selectedProductPictureUrl)} alt={`${selectedProductPictureUrl}`} />
+                            <img src={selectedProductPictureUrl} alt={`${selectedProductPictureUrl}`} />
                         </div>
 
                         {/* action buttons */}
