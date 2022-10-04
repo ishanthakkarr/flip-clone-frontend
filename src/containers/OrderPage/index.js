@@ -47,11 +47,11 @@ const OrderPage = (props) => {
                 <div className="orderImgContainer">
                   <img
                     className="orderImg"
-                    src={item.productId.productPictures[0].img}
+                    src={item?.productId?.productPictures[0]?.img}
                   />
                 </div>
                 <div className="orderRow">
-                  <div className="orderName">{item.productId.name}</div>
+                  <div className="orderName">{item?.productId?.name}</div>
                   <div className="orderPrice">
                     <BiRupee />
                     {item.payablePrice}
