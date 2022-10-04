@@ -164,17 +164,24 @@ export const makePayment = (totalAmount) => {
           type: userConstants.MAKE_PAYMENT_SUCCESS,
           payload: { paymentDetail },
         });
-        return true;
+        return {
+          isSuccess:true,
+          paymentDetail
+        };
       } else {
         const { error } = res.data;
         dispatch({
           type: userConstants.GET_USER_ORDER_DETAILS_FAILURE,
           payload: { error },
         });
-        return false;
+        return {
+          isSuccess:false
+        };
       }
     } catch (error) {
-      return false;
+      return {
+        isSuccess:false
+      };
       console.log(error);
     }
   };
