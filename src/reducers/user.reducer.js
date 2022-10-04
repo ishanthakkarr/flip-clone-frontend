@@ -8,6 +8,7 @@ const initState = {
   loading: false,
   orderFetching: false,
   placedOrderId: null,
+  paymentDetail: null
 };
 
 export default (state = initState, action) => {
@@ -86,6 +87,12 @@ export default (state = initState, action) => {
       state = {
         ...state,
         placedOrderId: action.payload.order._id,
+      };
+      break;
+    case userConstants.MAKE_PAYMENT_SUCCESS:
+      state = {
+        ...state,
+        paymentDetail: action.payload.paymentDetail
       };
       break;
   }

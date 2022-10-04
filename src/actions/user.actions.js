@@ -1,5 +1,5 @@
 import { cartConstants, userConstants } from "./constants";
-import axios from "../helpers/axios"
+import axios from "../helpers/axios";
 
 export const getAddress = () => {
   return async (dispatch) => {
@@ -22,10 +22,10 @@ export const getAddress = () => {
         });
       }
     } catch (error) {
-        dispatch({
-            type: userConstants.GET_USER_ADDRESS_FAILURE,
-            payload: { error },
-          });
+      dispatch({
+        type: userConstants.GET_USER_ADDRESS_FAILURE,
+        payload: { error },
+      });
     }
   };
 };
@@ -52,10 +52,10 @@ export const addAddress = (payload) => {
         });
       }
     } catch (error) {
-        dispatch({
-            type: userConstants.ADD_USER_ADDRESS_FAILURE,
-            payload: { error },
-          });
+      dispatch({
+        type: userConstants.ADD_USER_ADDRESS_FAILURE,
+        payload: { error },
+      });
     }
   };
 };
@@ -147,6 +147,34 @@ export const getOrder = (payload) => {
         });
       }
     } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// single order with complete info and delivery location
+export const makePayment = (totalAmount) => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.post(`/makePayment`, totalAmount);
+      dispatch({ type: userConstants.MAKE_PAYMENT_REQUEST });
+      if (res.status === 200) {
+        const paymentDetail = res;
+        dispatch({
+          type: userConstants.MAKE_PAYMENT_SUCCESS,
+          payload: { paymentDetail },
+        });
+        return true;
+      } else {
+        const { error } = res.data;
+        dispatch({
+          type: userConstants.GET_USER_ORDER_DETAILS_FAILURE,
+          payload: { error },
+        });
+        return false;
+      }
+    } catch (error) {
+      return false;
       console.log(error);
     }
   };
