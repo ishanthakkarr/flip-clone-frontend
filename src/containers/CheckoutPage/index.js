@@ -106,7 +106,7 @@ const CheckoutPage = (props) => {
   const [orderConfirmation, setOrderConfirmation] = useState(false);
   const [paymentOption, setPaymentOption] = useState(false);
   const [confirmOrder, setConfirmOrder] = useState(false);
-  const [paymentOptionValue, setPaymentOptionValue] = useState("cod");
+  const [paymentOptionValue, setPaymentOptionValue] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
@@ -150,16 +150,16 @@ const CheckoutPage = (props) => {
       // paymentStatus: "pending",
       // paymentType: "cod",
     };
-    if (paymentOptionValue == "cod") {
+    debugger
+    if (paymentOptionValue) {
       payload.paymentStatus = "pending";
       payload.paymentType = "cod";
       dispatch(addOrder(payload));
       setConfirmOrder(true);
-    } else if (paymentOptionValue == "online") {
+    } else if (!paymentOptionValue) {
       let paymentPayload = {
         totalAmount,
       };
-      // const res = await axios.post(`http://localhost:2000/api/makePayment`);
       dispatch(makePayment(paymentPayload)).then((result) => {
         if (!result) {
           // dispatch(getAllCategory());
@@ -366,16 +366,18 @@ const CheckoutPage = (props) => {
                   >
                     <input
                       type="radio"
-                      name="paymentOption"
-                      value={paymentOptionValue}
-                      onClick={() => setPaymentOptionValue("cod")}
+                      name="paymentOption1"
+                      checked={paymentOptionValue}
+                      // value={paymentOptionValue}
+                      onClick={() => setPaymentOptionValue(true)}
                     />
                     <div>Cash on delivery</div>
                     <input
                       type="radio"
-                      name="paymentOption"
-                      value={paymentOptionValue}
-                      onClick={() => setPaymentOptionValue("online")}
+                      name="paymentOption2"
+                      checked={!paymentOptionValue}
+                      // value={paymentOptionValue}
+                      onClick={() => setPaymentOptionValue(false)}
                     />
                     <div>Online</div>
                   </div>
